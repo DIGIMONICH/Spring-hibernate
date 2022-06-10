@@ -26,4 +26,20 @@ public class UserServiceImp implements UserService {
       return userDao.listUsers();
    }
 
+   @Transactional
+   @Override
+   public void findUser(int series, String model) {
+      List<User> users = listUsers();
+      int empty = 0;
+      for (User user: users) {
+         if(series == user.getCar().getSeries() && model.equals(user.getCar().getModel())){
+            System.out.println(user);
+            empty = 1;
+         }
+      }
+      if(empty == 0){
+         System.out.println("Юзер с такой машиной не найден");
+      }
+   }
+
 }
